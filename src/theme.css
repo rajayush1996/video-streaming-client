@@ -1,0 +1,234 @@
+/* MUI Theme Styles */
+
+/* Typography */
+.MuiTypography-root {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Button styles */
+.MuiButton-root {
+  text-transform: none;
+  font-weight: 500;
+  border-radius: var(--radius);
+}
+
+.MuiButton-contained {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+.MuiButton-outlined {
+  border-color: hsl(var(--border));
+  color: hsl(var(--foreground));
+}
+
+.MuiButton-text {
+  color: hsl(var(--foreground));
+}
+
+/* Card styles */
+.MuiCard-root {
+  background-color: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+  border-radius: var(--radius);
+  border: 1px solid hsl(var(--border));
+}
+
+/* Paper styles */
+.MuiPaper-root {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+/* Input styles */
+.MuiInputBase-root {
+  background-color: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+}
+
+.MuiInputBase-input {
+  color: hsl(var(--foreground));
+}
+
+/* Select styles */
+.MuiSelect-select {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+/* Menu styles */
+.MuiMenu-paper {
+  background-color: hsl(var(--popover));
+  color: hsl(var(--popover-foreground));
+  border: 1px solid hsl(var(--border));
+}
+
+/* Dialog styles */
+.MuiDialog-paper {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  border-radius: var(--radius);
+}
+
+/* Divider styles */
+.MuiDivider-root {
+  border-color: hsl(var(--border));
+}
+
+/* IconButton styles */
+.MuiIconButton-root {
+  color: hsl(var(--foreground));
+}
+
+/* Switch styles */
+.MuiSwitch-root {
+  .MuiSwitch-switchBase {
+    color: hsl(var(--background));
+  }
+  .MuiSwitch-track {
+    background-color: hsl(var(--muted));
+  }
+  .MuiSwitch-thumb {
+    background-color: hsl(var(--foreground));
+  }
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideRight {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scale {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+/* Animation classes */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.5s ease-out;
+}
+
+.animate-slide-left {
+  animation: slideLeft 0.5s ease-out;
+}
+
+.animate-slide-right {
+  animation: slideRight 0.5s ease-out;
+}
+
+.animate-scale {
+  animation: scale 0.5s ease-out;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-ping {
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-bounce {
+  animation: bounce 1s infinite;
+} 

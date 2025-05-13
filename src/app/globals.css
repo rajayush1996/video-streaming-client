@@ -1,42 +1,303 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@media (prefers-color-scheme: dark) {
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Base colors */
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+    --radius: 0.5rem;
+
+    /* Sidebar colors */
+    --sidebar-background: 240 10% 3.9%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 240 5.9% 10%;
+
+    /* Primary colors */
+    --primary: #3b82f6;
+    --primary-foreground: #ffffff;
+    
+    /* Secondary colors */
+    --secondary: #5a5a72;
+    --secondary-foreground: #ffffff;
+    --secondary-50: #f3f3f6;
+    --secondary-100: #e2e2e8;
+    --secondary-200: #c8c8d1;
+    --secondary-300: #a0a0b2;
+    --secondary-400: #7a7a93;
+    --secondary-500: #5a5a72;
+    --secondary-600: #44445a;
+    --secondary-700: #35354a;
+    --secondary-800: #232336;
+    --secondary-900: #181824;
+
+    /* Accent colors */
+    --accent: #00bcd4;
+    --accent-foreground: #ffffff;
+    --accent-50: #e0f7fa;
+    --accent-100: #b2ebf2;
+    --accent-200: #80deea;
+    --accent-300: #4dd0e1;
+    --accent-400: #26c6da;
+    --accent-500: #00bcd4;
+    --accent-600: #00acc1;
+    --accent-700: #0097a7;
+    --accent-800: #00838f;
+    --accent-900: #006064;
+
+    /* Reel Purple colors */
+    --reel-purple-50: #f3f1ff;
+    --reel-purple-100: #ebe5ff;
+    --reel-purple-200: #d9cfff;
+    --reel-purple-300: #bda9ff;
+    --reel-purple-400: #9b7aff;
+    --reel-purple-500: #7c4dff;
+    --reel-purple-600: #6e32f5;
+    --reel-purple-700: #5f24dd;
+    --reel-purple-800: #4f1fb5;
+    --reel-purple-900: #421d91;
+    --reel-purple-950: #260f63;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: 240 10% 3.9%;
+      --foreground: 0 0% 98%;
+      --card: 240 10% 3.9%;
+      --card-foreground: 0 0% 98%;
+      --popover: 240 10% 3.9%;
+      --popover-foreground: 0 0% 98%;
+      --primary: 0 0% 98%;
+      --primary-foreground: 240 5.9% 10%;
+      --secondary: 240 3.7% 15.9%;
+      --secondary-foreground: 0 0% 98%;
+      --muted: 240 3.7% 15.9%;
+      --muted-foreground: 240 5% 64.9%;
+      --accent: 240 3.7% 15.9%;
+      --accent-foreground: 0 0% 98%;
+      --destructive: 0 62.8% 30.6%;
+      --destructive-foreground: 0 0% 98%;
+      --border: 240 3.7% 15.9%;
+      --input: 240 3.7% 15.9%;
+      --ring: 240 4.9% 83.9%;
+
+      /* Sidebar colors */
+      --sidebar-background: 240 10% 3.9%;
+      --sidebar-foreground: 0 0% 98%;
+      --sidebar-primary: 0 0% 98%;
+      --sidebar-primary-foreground: 240 5.9% 10%;
+      --sidebar-accent: 240 3.7% 15.9%;
+      --sidebar-accent-foreground: 0 0% 98%;
+      --sidebar-border: 240 3.7% 15.9%;
+      --sidebar-ring: 240 4.9% 83.9%;
+    }
   }
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+  }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@layer components {
+  .hero-gradient {
+    @apply bg-gradient-to-br from-reel-purple-800 via-reel-purple-900 to-black;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:shadow-reel-purple-500/20 hover:-translate-y-1;
+  }
+  
+  .glass-card {
+    @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-xl;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-reel-purple-400 to-blue-400 bg-clip-text text-transparent;
+  }
 }
 
+@layer utilities {
+  .container {
+    @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.2s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.3s ease-out;
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scale-in {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Smooth transitions */
 * {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+/* Container styles */
+.container {
+  @apply mx-auto px-4 sm:px-6 lg:px-8;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+/* Card styles */
+.card {
+  @apply bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden;
+}
+
+/* Button styles */
+.btn {
+  @apply px-4 py-2 rounded-lg font-medium transition-colors duration-200;
+}
+
+.btn-primary {
+  @apply bg-reel-purple-600 hover:bg-reel-purple-700 text-white;
+}
+
+.btn-secondary {
+  @apply bg-secondary-600 hover:bg-secondary-700 text-white;
+}
+
+/* Input styles */
+.input {
+  @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-reel-purple-500;
+}
+
+/* Typography styles */
+.heading {
+  @apply text-2xl font-bold text-gray-900 dark:text-white;
+}
+
+.subheading {
+  @apply text-xl font-semibold text-gray-800 dark:text-gray-200;
+}
+
+.body-text {
+  @apply text-base text-gray-700 dark:text-gray-300;
+}
+
+/* Animation classes */
+.fade-in {
+  @apply animate-fade-in;
+}
+
+.slide-up {
+  @apply animate-slide-up;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
+
+@keyframes slide-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Material UI overrides */
+.MuiButton-root {
+  text-transform: none !important;
+}
+
+.MuiPaper-root {
+  background-image: none !important;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Import global styles from theme */
+@import '../theme.css'; 

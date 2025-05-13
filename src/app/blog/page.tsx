@@ -1,11 +1,21 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useBlogApi } from '@/hooks/useBlogApi'
-import { Box, Typography, CircularProgress, Container } from '@mui/material'
+import {
+  Box,
+  Typography,
+  CircularProgress,
+  Container,
+  Chip,
+  Card,
+  CardContent,
+  Avatar,
+  Grid,
+  Button
+} from '@mui/material'
 import { FileText } from 'lucide-react'
 
 interface Blog {
@@ -29,7 +39,7 @@ export default function BlogPage() {
     const loadBlogs = async () => {
       try {
         const data: any = await fetchBlogs()
-        setBlogs(data.results);
+        setBlogs(data.results)
       } catch (err) {
         console.error('Error loading blogs:', err)
       }
@@ -40,13 +50,7 @@ export default function BlogPage() {
 
   if (isLoading) {
     return (
-      <Box sx={{ 
-        minHeight: '100vh', 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center',
-        bgcolor: 'black'
-      }}>
+      <Box minHeight="100vh" display="flex" alignItems="center" justifyContent="center" bgcolor="#18181b">
         <CircularProgress sx={{ color: '#7C3AED' }} />
       </Box>
     )
@@ -54,37 +58,12 @@ export default function BlogPage() {
 
   if (error) {
     return (
-      <Box sx={{ 
-        minHeight: '100vh', 
-        bgcolor: 'black', 
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
+      <Box minHeight="100vh" bgcolor="#18181b" color="white" display="flex" alignItems="center" justifyContent="center">
         <Container maxWidth="md">
-          <Box sx={{ textAlign: 'center' }}>
-            <FileText size={48} className="text-reel-purple-500 mx-auto mb-4" />
-            <Typography 
-              variant="h4" 
-              sx={{ 
-                mb: 2,
-                color: '#fff',
-                fontFamily: 'Inter, sans-serif',
-                fontWeight: 600
-              }}
-            >
-              Error Loading Blogs
-            </Typography>
-            <Typography 
-              sx={{ 
-                mb: 4,
-                color: 'rgba(255,255,255,0.7)',
-                fontFamily: 'Inter, sans-serif'
-              }}
-            >
-              {error}
-            </Typography>
+          <Box textAlign="center">
+            <FileText size={48} color="#7C3AED" />
+            <Typography variant="h4" fontWeight={600} sx={{ mt: 2 }}>Error Loading Blogs</Typography>
+            <Typography sx={{ mt: 1, color: 'rgba(255,255,255,0.7)' }}>{error}</Typography>
           </Box>
         </Container>
       </Box>
@@ -92,95 +71,79 @@ export default function BlogPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Hero Section */}
-      <section className="hero-gradient py-12 md:py-16">
-        <div className="container px-4 mx-auto">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">Latest Blog Posts</h1>
-            <p className="text-lg text-white/90">
-              Discover insightful articles about video content creation and trends
-            </p>
-          </div>
-        </div>
-      </section>
+    <Box minHeight="100vh" bgcolor="#18181b" color="#fff">
+      <Box py={8} textAlign="center">
+        <Container maxWidth="md">
+          <Typography variant="h3" fontWeight={700} gutterBottom>
+            Latest Blog Posts
+          </Typography>
+          <Typography variant="body1" sx={{ color: 'rgba(255,255,255,0.8)' }}>
+            Discover insightful articles about video content creation and trends
+          </Typography>
+        </Container>
+      </Box>
 
-      {/* Blog Posts Grid */}
-      <section className="py-12">
-        <div className="container px-4 mx-auto">
-          {blogs.length === 0 ? (
-            <Box sx={{ 
-              textAlign: 'center',
-              py: 8,
-              color: 'rgba(255,255,255,0.7)'
-            }}>
-              <Typography variant="h6" sx={{ mb: 2 }}>
-                No blog posts available
-              </Typography>
-              <Typography>
-                Check back later for new content!
-              </Typography>
-            </Box>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {blogs.map((post) => (
-                <article 
-                  key={post._id}
-                  className="bg-white/5 rounded-lg overflow-hidden hover:bg-white/10 transition-all duration-300 group"
+      <Container maxWidth="lg" sx={{ py: 8 }}>
+        {blogs.length === 0 ? (
+          <Box textAlign="center" py={8} color="rgba(255,255,255,0.7)">
+            <Typography variant="h6" gutterBottom>No blog posts available</Typography>
+            <Typography>Check back later for new content!</Typography>
+          </Box>
+        ) : (
+          <Grid container spacing={4}>
+            {blogs.map((post) => (
+              <Grid component="div" size= {{ xs: 12, sm:6 , md:4 }} key={post._id}>
+                <Card
+                  sx={{
+                    bgcolor: 'rgba(255,255,255,0.05)',
+                    borderRadius: 3,
+                    transition: '0.3s',
+                    '&:hover': {
+                      bgcolor: 'rgba(255,255,255,0.08)',
+                      transform: 'translateY(-4px)',
+                    }
+                  }}
                 >
-                  <div className="p-6">
-                    <div className="flex gap-2 mb-3">
-                      <span className="px-3 py-1 text-sm rounded-full bg-reel-purple-500/20 text-reel-purple-400">
-                        {post.category}
-                      </span>
-                      <span className="px-3 py-1 text-sm rounded-full bg-white/10 text-white/70">
-                        {Math.ceil(post.content.length / 1000)} min read
-                      </span>
-                    </div>
+                  <CardContent>
+                    <Box mb={2} display="flex" gap={1} flexWrap="wrap">
+                      <Chip label={post.category} size="small" sx={{ bgcolor: '#7C3AED22', color: '#a78bfa' }} />
+                      <Chip label={`${Math.ceil(post.content.length / 1000)} min read`} size="small" sx={{ bgcolor: '#fff1', color: '#fff9' }} />
+                    </Box>
 
-                    <h2 className="text-xl font-semibold mb-3 line-clamp-2 group-hover:text-reel-purple-400 transition-colors">
+                    <Typography variant="h6" gutterBottom noWrap>
                       {post.title}
-                    </h2>
-                    
-                    <p className="text-white/70 mb-4 line-clamp-3">
-                      {post.description || post.content.substring(0, 150)}...
-                    </p>
+                    </Typography>
 
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-full bg-reel-purple-500/20 flex items-center justify-center text-reel-purple-400">
+                    <Typography variant="body2" sx={{ color: '#ccc', mb: 2 }}>
+                      {post.description || post.content.substring(0, 150)}...
+                    </Typography>
+
+                    <Box display="flex" alignItems="center" justifyContent="space-between">
+                      <Box display="flex" alignItems="center" gap={1}>
+                        <Avatar sx={{ bgcolor: '#7C3AED22', color: '#a78bfa' }}>
                           {post.admin ? post.admin.charAt(0) : 'A'}
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium">{post.admin || 'Anonymous'}</p>
-                          <p className="text-xs text-white/50">
+                        </Avatar>
+                        <Box>
+                          <Typography variant="body2">{post.admin || 'Anonymous'}</Typography>
+                          <Typography variant="caption" color="#aaa">
                             {new Date(post.createdAt).toLocaleDateString()}
-                          </p>
-                        </div>
-                      </div>
-                      
-                      <Link 
-                        href={`/blog/${post._id}`}
-                        className="inline-flex items-center gap-1 text-reel-purple-400 hover:text-reel-purple-300 transition-colors"
-                      >
-                        Read More
-                        <svg 
-                          className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" 
-                          fill="none" 
-                          viewBox="0 0 24 24" 
-                          stroke="currentColor"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
+                          </Typography>
+                        </Box>
+                      </Box>
+
+                      <Link href={`/blog/${post._id}`} passHref>
+                        <Button size="small" sx={{ color: '#a78bfa', textTransform: 'none' }}>
+                          Read More →
+                        </Button>
                       </Link>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-    </div>
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        )}
+      </Container>
+    </Box>
   )
-} 
+}

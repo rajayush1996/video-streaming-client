@@ -16,8 +16,6 @@ import {
 } from '@mui/material'
 import {
   PlayCircle,
-  ThumbUp,
-  Comment,
 } from '@mui/icons-material'
 import { Volume2, VolumeX } from 'lucide-react'
 
@@ -28,23 +26,19 @@ interface VideoCardProps {
   thumbnail: string
   duration: string
   views: number
-  likes?: number
-  comments?: number
   category: string
-  author: string
-  mediaFileUrl: string
+  date: string
 }
 
 export default function VideoCard({
   id,
   title,
+  description,
   thumbnail,
   duration,
   views,
-  likes,
-  comments,
   category,
-  author,
+  date,
 }: VideoCardProps) {
   const [isMuted, setIsMuted] = useState(true);
   const router = useRouter();
@@ -58,7 +52,10 @@ export default function VideoCard({
   return (
     <Card
       sx={{
-        height: '100%',
+        width: 280,
+        aspectRatio: '1 / 1',
+        minWidth: 260,
+        maxWidth: 320,
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: '#000',
@@ -71,17 +68,14 @@ export default function VideoCard({
       }}
     >
       <CardActionArea component={Link} href={`/videos/${id}`}
-        className="group">
-        <Box sx={{ position: 'relative', height: 240, width: '100%' }}>
+        className="group" sx={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'stretch' }}>
+        <Box sx={{ position: 'relative', width: '100%', aspectRatio: '1 / 1', flex: 1 }}>
           <CardMedia
             component="img"
-            height="240"
             image={thumbnail}
             alt={title}
             sx={{
               objectFit: 'cover',
-              borderTopLeftRadius: 12,
-              borderTopRightRadius: 12,
               width: '100%',
               height: '100%',
               display: 'block',
@@ -160,7 +154,7 @@ export default function VideoCard({
             }}
           />
         </Box>
-        <CardContent className="bg-black text-white flex flex-col gap-2 p-4 pb-5">
+        <CardContent sx={{ flex: '0 0 auto', display: 'flex', flexDirection: 'column', gap: 1, p: 2, pb: 2.5 }}>
           <Chip
             label={category}
             size="small"
@@ -177,20 +171,19 @@ export default function VideoCard({
               width: 'fit-content',
             }}
           />
-          <Typography variant="h6" fontWeight={700} sx={{ mb: 1, color: '#fff', fontSize: '1.1rem', lineHeight: 1.2 }}>
+          <Typography variant="h6" fontWeight={700} sx={{ mb: 0.5, color: '#fff', fontSize: '1.1rem', lineHeight: 1.2 }} noWrap>
             {title}
           </Typography>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, color: '#A78BFA', fontSize: '1rem', mb: 1 }}>
-            <Typography variant="body2" sx={{ color: '#fff', fontWeight: 500 }}>{author}</Typography>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-              <ThumbUp fontSize="small" sx={{ color: '#A78BFA' }} />
-              <Typography variant="body2" sx={{ color: '#A78BFA' }}>{likes}</Typography>
-            </Box>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-              <Comment fontSize="small" sx={{ color: '#A78BFA' }} />
-              <Typography variant="body2" sx={{ color: '#A78BFA' }}>{comments}</Typography>
-            </Box>
-            <Typography variant="body2" sx={{ color: '#fff', marginLeft: 'auto' }}>{views.toLocaleString()} views</Typography>
+          <Typography variant="body2" color="#fff9" noWrap>
+            {description}
+          </Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 1 }}>
+            <Typography variant="caption" color="#fff7">
+              {new Date(date).toLocaleDateString()}
+            </Typography>
+            <Typography variant="caption" color="#fff7" sx={{ ml: 'auto' }}>
+              {views.toLocaleString()} views
+            </Typography>
           </Box>
         </CardContent>
       </CardActionArea>

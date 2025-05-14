@@ -109,8 +109,11 @@ const VideosPage = () => {
                       description={video.description}
                       duration="0:00"
                       views={video.views}
+                      likes={0}
+                      comments={0}
                       category={video.category}
-                      date={video.createdAt}
+                      author={video.userId}
+                      mediaFileUrl={video.mediaFileUrl}
                     />
                   </Box>
                 ))}
